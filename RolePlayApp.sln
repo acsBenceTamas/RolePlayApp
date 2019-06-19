@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolePlayApp.UserInterface", "RolePlayApp.UserInterface\RolePlayApp.UserInterface.csproj", "{0C15B5AF-1E87-4BDA-BDEB-BE8836F4ECBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{36A70932-2E98-4BB1-9EBF-A4C6B057D07B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolePlayApp.Backend", "Application\RolePlayApp.Backend.csproj", "{36A70932-2E98-4BB1-9EBF-A4C6B057D07B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
