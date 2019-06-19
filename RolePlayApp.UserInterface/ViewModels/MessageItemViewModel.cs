@@ -3,11 +3,11 @@ using RolePlayApp.Backend.Models;
 
 namespace RolePlayApp.UserInterface.ViewModels
 {
-    class MessageItemView
+    class MessageItemViewModel
     {
         public MessageItem Item;
 
-        public MessageItemView(MessageItem item)
+        public MessageItemViewModel(MessageItem item)
         {
             Item = item;
         }

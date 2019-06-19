@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace RolePlayApp.Backend.Models
 
 {
     public class MessageComposer
     {
-        private List<MessageItem> _messages = new List<MessageItem>();
+        public ObservableCollection<MessageItem> Items { get; private set; } = new ObservableCollection<MessageItem>();
 
         public void Add(MessageItem item)
         {
-            _messages.Add(item);
+            Items.Add(item);
         }
 
         public Message Compose()
         {
-            return new Message(_messages);
+            return new Message(Items);
         }
     }
 }

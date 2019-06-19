@@ -5,10 +5,10 @@ namespace RolePlayApp.UserInterface.Views
     /// <summary>
     /// Interaction logic for MessageDisplay.xaml
     /// </summary>
-    public partial class MessageDisplay : UserControl
+    public partial class MessageView : UserControl
     {
 
-        public MessageDisplay()
+        public MessageView()
         {
             InitializeComponent();
         }

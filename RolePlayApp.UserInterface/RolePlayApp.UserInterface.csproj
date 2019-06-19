@@ -72,15 +72,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\InfoBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MessageComposerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MessageDisplay.xaml">
+    <Page Include="Views\MessageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MessageItemDisplay.xaml">
+    <Page Include="Views\MessageItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -92,18 +96,23 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\MessageConverter.cs" />
     <Compile Include="Converters\MessageItemConverter.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MessageViewModel.cs" />
+    <Compile Include="Views\InfoBox.xaml.cs">
+      <DependentUpon>InfoBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MessageComposerView.xaml.cs">
       <DependentUpon>MessageComposerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MessageDisplay.xaml.cs">
-      <DependentUpon>MessageDisplay.xaml</DependentUpon>
+    <Compile Include="Views\MessageView.xaml.cs">
+      <DependentUpon>MessageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MessageItemDisplay.xaml.cs">
-      <DependentUpon>MessageItemDisplay.xaml</DependentUpon>
+    <Compile Include="Views\MessageItemView.xaml.cs">
+      <DependentUpon>MessageItemView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\MessageItemView.cs" />
+    <Compile Include="ViewModels\MessageItemViewModel.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

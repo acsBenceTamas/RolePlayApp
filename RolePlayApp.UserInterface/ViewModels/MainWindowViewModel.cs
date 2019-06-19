@@ -7,9 +7,12 @@ namespace RolePlayApp.UserInterface.ViewModels
     class MainWindowViewModel
     {
         public ObservableCollection<Message> Messages { get; } = new ObservableCollection<Message>();
+
         public ObservableCollection<Character> Characters { get; } = new ObservableCollection<Character>();
+
         public ObservableCollection<MessageItem> CurrentMessage { get; } = new ObservableCollection<MessageItem>();
-        public MessageComposer Composer = new MessageComposer();
+
+        public MessageComposer Composer { get; } = new MessageComposer();
 
         public MainWindowViewModel()
         {
@@ -19,6 +22,7 @@ namespace RolePlayApp.UserInterface.ViewModels
             {
                 TestMessageShit();
             }
+            Composer.Add(new MessageItem("He composes a new message", MessageItemType.Action, Characters[0]));
         }
 
         private void AddCharacter(string name, Color color)

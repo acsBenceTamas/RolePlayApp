@@ -5,9 +5,9 @@ namespace RolePlayApp.UserInterface.Views
     /// <summary>
     /// Interaction logic for MessageComposer.xaml
     /// </summary>
-    public partial class MessageComposer : UserControl
+    public partial class MessageComposerView : UserControl
     {
-        public MessageComposer()
+        public MessageComposerView()
         {
             InitializeComponent();
         }

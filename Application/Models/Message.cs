@@ -10,7 +10,6 @@ namespace RolePlayApp.Backend.Models
 
         public Message()
         {
-
         }
 
         public Message(params MessageItem[] messages)
@@ -18,7 +17,7 @@ namespace RolePlayApp.Backend.Models
             Items.AddRange(messages);
         }
 
-        public Message(List<MessageItem> messages)
+        public Message(IList<MessageItem> messages)
         {
             Items.AddRange(messages);
         }

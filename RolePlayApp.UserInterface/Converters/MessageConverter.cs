@@ -7,29 +7,29 @@ using RolePlayApp.UserInterface.ViewModels;
 namespace RolePlayApp.UserInterface.Converters
 {
     [ValueConversion(typeof(MessageItem), typeof(MessageItemViewModel))]
-    public class MessageItemConverter : IValueConverter
+    public class MessageConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value.GetType() == typeof(MessageItem))
+            if (value.GetType() == typeof(Message))
             {
-                return new MessageItemViewModel((MessageItem) value);
+                return new MessageViewModel((Message) value);
             }
             else
             {
-                throw new ArgumentException("Must be a MessageItem.", "value");
+                throw new ArgumentException("'value' must be a Message.", "value");
             }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value.GetType() == typeof(MessageItemViewModel))
+            if (value.GetType() == typeof(MessageViewModel))
             {
-                return ((MessageItemViewModel) value).Item;
+                return ((MessageViewModel) value).Message;
             }
             else
             {
-                throw new ArgumentException("Must be a MessageItemView.", "value");
+                throw new ArgumentException("'value' must be a MessageView.", "value");
             }
         }
     }
