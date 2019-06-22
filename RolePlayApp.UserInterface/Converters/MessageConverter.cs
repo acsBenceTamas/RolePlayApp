@@ -17,7 +17,7 @@ namespace RolePlayApp.UserInterface.Converters
             }
             else
             {
-                throw new ArgumentException("'value' must be a Message.", "value");
+                throw new ArgumentException("Must be a MessageItem.", "value");
             }
         }
 
@@ -25,11 +25,11 @@ namespace RolePlayApp.UserInterface.Converters
         {
             if (value.GetType() == typeof(MessageViewModel))
             {
-                return ((MessageViewModel) value).Message;
+                return ((MessageViewModel) value).MessageBehind;
             }
             else
             {
-                throw new ArgumentException("'value' must be a MessageView.", "value");
+                throw new ArgumentException("Must be a MessageItemViewModel.", "value");
             }
         }
     }

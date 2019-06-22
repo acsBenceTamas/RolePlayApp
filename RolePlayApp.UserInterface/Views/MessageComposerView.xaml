@@ -10,19 +10,20 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid d:DataContext="{d:DesignInstance Type=ViewModels:MainWindowViewModel}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" MinWidth="100"/>
+            <ColumnDefinition Width="1*" MinWidth="100"/>
             <ColumnDefinition Width="5"/>
-            <ColumnDefinition Width="*" MinWidth="150"/>
+            <ColumnDefinition Width="2*" MinWidth="150"/>
             <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
-        <local:MessageItemView MessageItems="{Binding Composer.Items}" Test="Test" Grid.Column="0"/>
+        <local:MessageItemView MessageItems="{Binding Composer.Items}" Grid.Column="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
-        <TextBlock Grid.Column="2">Composing will go here</TextBlock>
+        <TextBox Grid.Column="2"></TextBox>
         <Grid Grid.Column="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
+            <local:CharacterSelectionView/>
             <Button Grid.Row="1">Send</Button>
         </Grid>
     </Grid>

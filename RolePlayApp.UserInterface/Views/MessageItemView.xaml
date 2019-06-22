@@ -11,13 +11,13 @@
     <UserControl.Resources>
         <converters:MessageItemConverter x:Key="messageConverter" />
         <DataTemplate x:Key="MessageItem" DataType="{x:Type ListViewItem}">
-            <Grid Width="Auto" HorizontalAlignment="Stretch">
+            <Grid Width="Auto" HorizontalAlignment="Stretch" Margin="1">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="{Binding CharacterName}"
                            FontWeight="Bold" Foreground="{Binding NameColor}"/>
@@ -27,15 +27,19 @@
             </Grid>
         </DataTemplate>
     </UserControl.Resources>
-    <Grid>
-        <ListView ItemsSource="{Binding MessageItems}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" Margin="5">
-            <ListView.ItemTemplate>
+    <Grid Name="Grid">
+        <ListBox ItemsSource="{Binding MessageItems}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" Margin="1">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="IsHitTestVisible" Value="False" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <ContentPresenter Content="{Binding Converter={StaticResource messageConverter}}" 
+                    <ContentPresenter Content="{Binding Converter={StaticResource messageConverter}}"
                         ContentTemplate="{StaticResource MessageItem}"/>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#00ffffff" Text="{Binding Test}"/>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>

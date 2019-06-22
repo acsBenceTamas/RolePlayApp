@@ -11,8 +11,10 @@
 
     <UserControl.Resources>
         <converters:MessageConverter x:Key="messageConverter" />
-        <DataTemplate x:Key="Message" DataType="{x:Type ListViewItem}">
-            <Grid ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Stretch">
+        <DataTemplate x:Key="Message" DataType="{x:Type ListBoxItem}">
+            <Grid 
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Stretch" 
+                d:DataContext="{d:DesignInstance Type=ViewModels:MessageViewModel}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -20,13 +22,15 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding SubmissionTime}"></TextBlock>
-                <local:MessageItemView MessageItems="{Binding Messages}" Test="Test" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"></local:MessageItemView>
+                <TextBlock Text="{Binding SubmissionTime}"/>
+                <local:MessageItemView 
+                    MessageItems="{Binding Items}" Grid.Row="1" Grid.Column="0" 
+                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
             </Grid>
         </DataTemplate>
     </UserControl.Resources>
-    <Grid>
-        <ListView ItemsSource="{Binding Messages}"
+    <Grid d:DataContext="{d:DesignInstance Type=ViewModels:MainWindowViewModel}">
+        <ListBox ItemsSource="{Binding Messages}"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                   ScrollViewer.VerticalScrollBarVisibility="Visible"
                   ScrollViewer.CanContentScroll="False"
@@ -35,13 +39,19 @@
                   VerticalAlignment="Stretch"
                   VerticalContentAlignment="Bottom"
                   Name="List">
-            <ListView.ItemTemplate>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="IsHitTestVisible" Value="False" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <ContentPresenter Content="{Binding Converter={StaticResource messageConverter}}" 
-                            ContentTemplate="{StaticResource Message}"/>
+                    <ContentPresenter 
+                        Content="{Binding Converter={StaticResource messageConverter}}" 
+                        ContentTemplate="{StaticResource Message}"/>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <Rectangle Name="BottomMarker"></Rectangle>
     </Grid>
 </UserControl>

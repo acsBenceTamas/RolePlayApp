@@ -1,22 +1,28 @@
 ﻿using RolePlayApp.Backend.Models;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace RolePlayApp.UserInterface.ViewModels
 {
     class MessageViewModel
     {
-        public Message Message { get; private set; }
+        public Message MessageBehind { get; private set; }
 
         public MessageViewModel(Message message)
         {
-            Message = message;
+            MessageBehind = message;
         }
 
-        public List<MessageItem> Items
+        public ObservableCollection<MessageItem> Items
         {
             get
             {
-                return Message.Items;
+                return MessageBehind.Items;
+            }
+
+            set
+            {
+                MessageBehind.Items = value;
             }
         }
 
@@ -24,7 +30,7 @@ namespace RolePlayApp.UserInterface.ViewModels
         {
             get
             {
-                return $"{Message.SubmissionTime.ToLongTimeString()} - {Message.SubmissionTime.ToLongDateString()}";
+                return $"{MessageBehind.SubmissionTime.ToLongTimeString()} - {MessageBehind.SubmissionTime.ToLongDateString()}";
             }
         }
     }
