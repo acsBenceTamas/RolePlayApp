@@ -110,6 +110,7 @@
     <Compile Include="ViewModels\CharacterViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MessageViewModel.cs" />
+    <Compile Include="ViewModels\HelperClasses\RelayCommand.cs" />
     <Compile Include="Views\CharacterSelectionView.xaml.cs">
       <DependentUpon>CharacterSelectionView.xaml</DependentUpon>
     </Compile>

@@ -4,8 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:UserControls="clr-namespace:RolePlayApp.UserInterface.Views"
+        xmlns:Models="clr-namespace:RolePlayApp.Backend.Models;assembly=Application"
         mc:Ignorable="d"
         Title="RP app" MinHeight="600" MinWidth="800">
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding AddMessageItemCommand}" Key="Enter"/>
+        <KeyBinding Command="{Binding SendMessageCommand}" Key="Enter" Modifiers="Ctrl"/>
+        <KeyBinding Command="{Binding SelectCharacterCommand}" CommandParameter="1" Key="D1" Modifiers="Ctrl"/>
+        <KeyBinding Command="{Binding SelectCharacterCommand}" CommandParameter="2" Key="D2" Modifiers="Ctrl"/>
+        <KeyBinding Command="{Binding SelectCharacterCommand}" CommandParameter="3" Key="D3" Modifiers="Ctrl"/>
+        <KeyBinding Command="{Binding SelectCharacterCommand}" CommandParameter="4" Key="D4" Modifiers="Ctrl"/>
+        <KeyBinding Command="{Binding SelectCharacterCommand}" CommandParameter="5" Key="D5" Modifiers="Ctrl"/>
+        <KeyBinding Command="{Binding SelectCharacterCommand}" CommandParameter="6" Key="D6" Modifiers="Ctrl"/>
+        <KeyBinding Command="{Binding SelectCharacterCommand}" CommandParameter="7" Key="D7" Modifiers="Ctrl"/>
+        <KeyBinding Command="{Binding SelectCharacterCommand}" CommandParameter="8" Key="D8" Modifiers="Ctrl"/>
+        <KeyBinding Command="{Binding SelectCharacterCommand}" CommandParameter="9" Key="D9" Modifiers="Ctrl"/>
+        <KeyBinding Command="{Binding SelectMessageTypeCommand}" CommandParameter="{x:Static Models:MessageItemType.Action}" Key="Q" Modifiers="Ctrl"/>
+        <KeyBinding Command="{Binding SelectMessageTypeCommand}" CommandParameter="{x:Static Models:MessageItemType.Speech}" Key="W" Modifiers="Ctrl"/>
+        <KeyBinding Command="{Binding SelectMessageTypeCommand}" CommandParameter="{x:Static Models:MessageItemType.Environment}" Key="E" Modifiers="Ctrl"/>
+    </Window.InputBindings>
     <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*" MinHeight="100"/>

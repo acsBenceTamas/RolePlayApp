@@ -1,5 +1,4 @@
 ﻿using RolePlayApp.Backend.Models;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace RolePlayApp.UserInterface.ViewModels

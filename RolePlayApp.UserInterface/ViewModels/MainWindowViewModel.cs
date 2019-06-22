@@ -1,30 +1,91 @@
 ﻿using RolePlayApp.Backend.Models;
+using RolePlayApp.UserInterface.ViewModels.HelperClasses;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Forms;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace RolePlayApp.UserInterface.ViewModels
 {
-    class MainWindowViewModel
+    class MainWindowViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Message> Messages { get; set; } = new ObservableCollection<Message>();
+        private Character _selectedCharacter;
+
+        public ObservableCollection<Backend.Models.Message> Messages { get; set; } = new ObservableCollection<Backend.Models.Message>();
 
         public ObservableCollection<Character> Characters { get; set; } = new ObservableCollection<Character>();
 
         public MessageComposer Composer { get; set; } = new MessageComposer();
 
-        public Character SelectedCharacter { get; set; }
+        public Character SelectedCharacter
+        {
+            get => _selectedCharacter; set
+            {
+                _selectedCharacter = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public ICommand SendMessageCommand { get; set; }
+
+        public ICommand AddMessageItemCommand { get; set; }
+
+        public ICommand SelectCharacterCommand { get; set; }
+
+        public ICommand SelectMessageTypeCommand { get; set; }
 
         public MainWindowViewModel()
         {
+            SendMessageCommand = new RelayCommand(o => SendMessage(), o => Composer.Items.Count > 0);
+            AddMessageItemCommand = new RelayCommand(o => AddMessageItemToPreparedMessage(), o => CanAddMessageItemToPreparedMessage());
+            SelectCharacterCommand = new RelayCommand<string>(i => SelectCharacter(i), i => CanSelectCharacter(i));
+            SelectMessageTypeCommand = new RelayCommand<MessageItemType>(type => SelectMessageType(type), i => true);
             AddCharacter("Kayden", Colors.Orange);
             AddCharacter("Ashe", Colors.Red);
-            for (int i = 0; i < 5; i++)
+        }
+
+        private void SelectMessageType(MessageItemType type)
+        {
+            Composer.Type = type;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private bool CanSelectCharacter(string i)
+        {
+            return Characters.Count >= int.Parse(i);
+        }
+
+        private void SelectCharacter(string i)
+        {
+            SelectedCharacter = Characters[int.Parse(i) - 1];
+            if (Composer.Type == MessageItemType.Environment) Composer.Type = MessageItemType.Speech;
+        }
+
+        private void AddMessageItemToPreparedMessage()
+        {
+            Composer.Add(new MessageItem(Composer.Text, Composer.Type, SelectedCharacter));
+            Composer.Text = string.Empty;
+        }
+
+        private bool CanAddMessageItemToPreparedMessage()
+        {
+            if (Composer.Text.Length == 0) return false;
+            if (!Characters.Contains(SelectedCharacter) && Composer.Type != MessageItemType.Environment)
             {
-                TestMessageShit();
+                MessageBox.Show("Select a character or set message type to Environment.");
+                return false;
             }
-            Composer.Add(new MessageItem("He composes a new message 1", MessageItemType.Action, Characters[0]));
-            Composer.Add(new MessageItem("He composes a new message 2", MessageItemType.Action, Characters[0]));
-            Composer.Add(new MessageItem("She composes a new message 1", MessageItemType.Action, Characters[1]));
+            return true;
+        }
+
+        private void SendMessage()
+        {
+            Messages.Add(Composer.ComposeMessage());
         }
 
         private void AddCharacter(string name, Color color)
@@ -32,17 +93,9 @@ namespace RolePlayApp.UserInterface.ViewModels
             Characters.Add(new Character(name, color));
         }
 
-        private void TestMessageShit()
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            Messages.Add(new Message(
-                new MessageItem("He walks over to the window.", MessageItemType.Action, Characters[0]),
-                new MessageItem("I am currently talking.", MessageItemType.Speech, Characters[0]),
-                new MessageItem("He scratches his head.", MessageItemType.Action, Characters[0]),
-                new MessageItem("Yes, you are definitely talking.", MessageItemType.Speech, Characters[1]),
-                new MessageItem("She looks down at him.", MessageItemType.Action, Characters[1]),
-                new MessageItem("A giant macro hand smashes through the window and shit. This message is intentionally extra long to test wrapping. Like, really freaking long, if I am perfectly honest with myself." +
-                "\nAlso contains line braks just in case.", MessageItemType.Environment)
-                ));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

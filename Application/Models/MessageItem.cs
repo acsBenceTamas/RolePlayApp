@@ -1,45 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace RolePlayApp.Backend.Models
 {
-    public struct MessageItem
+    public struct MessageItem : INotifyPropertyChanged
     {
-        public MessageItem(string text, MessageItemType type, Character character)
+        private Character _character;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public MessageItem(string text, MessageItemType type, Character character) : this()
         {
             Text = text;
             Type = type;
-            Character = character;
+            _character = character;
         }
-        public MessageItem(string text, MessageItemType type)
+        public MessageItem(string text, MessageItemType type) : this()
         {
             Text = text;
             Type = type;
-            Character = null;
+            _character = null;
         }
 
         public string Text { get; set; }
         public MessageItemType Type { get; set; }
-        public Character Character { get; set; }
-    }
+        public Character Character
+        {
+            get => _character;
+            set
+            {
+                _character = value;
+                NotifyPropertyChanged();
+            }
+        }
 
-   public enum MessageItemType
-    {
-        /// <summary>
-        /// A <see cref="Character"/>'s action.
-        /// </summary>
-        Action,
-        /// <summary>
-        /// A <see cref="Character"/>'s speech.
-        /// </summary>
-        Speech,
-        /// <summary>
-        /// An environmental event that does not belong to a specific
-        /// <see cref="Character"/> or belongs to several.
-        /// </summary>
-        Environment
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

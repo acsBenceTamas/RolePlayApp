@@ -46,6 +46,7 @@
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\MessageComposer.cs" />
     <Compile Include="Models\MessageItem.cs" />
+    <Compile Include="Models\MessageItemType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
