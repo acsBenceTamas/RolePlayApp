@@ -8,7 +8,7 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:Models="clr-namespace:RolePlayApp.Backend.Models;assembly=Application"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="219" d:DesignWidth="360.5">
     <UserControl.Resources>
         <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
                             ObjectType="{x:Type System:Enum}">
@@ -16,19 +16,42 @@
                 <x:Type TypeName="Models:MessageItemType"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
+        <Style x:Key="SimpleListBoxItem" TargetType="ListBoxItem">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Name="Border" Padding="2" SnapsToDevicePixels="true">
+                            <TextBlock Text="{Binding}" TextAlignment="Center">
+                            </TextBlock>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="Border" Property="Background"
+                                    Value="Gray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <Grid d:DataContext="{d:DesignInstance Type=ViewModels:MainWindowViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ListBox Grid.Row="0" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding Composer.Type}">
-            <ListBox.ItemsPanel>
+        <ListView Grid.Row="0" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding Composer.Type}" ItemContainerStyle="{StaticResource SimpleListBoxItem}" Width="Auto">
+            <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel IsItemsHost="True" />
+                    <UniformGrid Rows="1"/>
                 </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </ListBox>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <TextBox Grid.Row="1" Text="{Binding Composer.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch"
                  TextWrapping="Wrap" HorizontalScrollBarVisibility="Disabled"/>
     </Grid>
